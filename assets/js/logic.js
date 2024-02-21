@@ -3,10 +3,14 @@ let currentQuestionIndex = 0;
 let time = questions.length * 15;
 let timerId;
 
+
 // add variables to reference DOM elements
 // example is below
 let questionsEl = document.getElementById('questions');
-
+let startBtn = document.getElementById('start');
+let start_screen = document.getElementById("start-screen");
+let wrapper = document.getElementById('wrapper');
+let submitBtn = document.getElementById("submit");
 
 // reference the sound effects
 let sfxRight = new Audio('assets/sfx/correct.wav');
@@ -14,13 +18,17 @@ let sfxWrong = new Audio('assets/sfx/incorrect.wav');
 
 function startQuiz() {
   // hide start screen
-
-
+     start_screen.style.display = "none";
+         
   // un-hide questions section
+     questionsEl.style.display = "block"; //not working
 
   // start timer
-
+      timerId = window.setInterval(function () {
+        document.getElementById("time").innerHTML = time--; }, 1000);
+  
   // show starting time
+    document.getElementById("time").innerHTML = time;
 
   // call a function to show the next question
   getQuestion();
@@ -28,14 +36,16 @@ function startQuiz() {
 
 function getQuestion() {
   // get current question object from array
+  let currentQuestion = questions[currentQuestionIndex];
+  //console.log(currentQuestion); Not needed....for testing
 
   // update title with current question
-
+  questionsEl = currentQuestion;
   // clear out any old question choices
 
   // loop over the choices for each question
   // get the number of questions
-  let numberOfQuestions; // assign it the value of the length of the questions array
+  let numberOfQuestions = questions.length; // assign it the value of the length of the questions array
   for (let i = 0; i < numberOfQuestions; i++) {
 
     // create a new button for each choice, setting the label and value for the button
@@ -65,12 +75,14 @@ function questionClick(event) {
 
   // display "wrong" feedback on page
 
-} else {
+} 
+
+//else {
   // play "right" sound effect
 
   // display "right" feedback on page by displaying the text "Correct!" in the feedback element
 
-}
+//}
 // flash right/wrong feedback on page for half a second
 // set the feedback element to have the class of "feedback"
 
@@ -100,7 +112,7 @@ function quizEnd() {
 // add the code in this function to update the time, it should be called every second
 function clockTick() {
   // right here - update time
-
+    let updateTimer = window.setInterval()
   // update the element to display the new time value
 
   // check if user ran out of time; if so, call the quizEnd() function
@@ -145,6 +157,7 @@ submitBtn.onclick = saveHighScore;
 
 // user clicks button to start quiz
 startBtn.onclick = startQuiz;
+
 
 // user clicks on an element containing choices
 choicesEl.onclick = questionClick;
