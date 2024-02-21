@@ -11,6 +11,8 @@ let startBtn = document.getElementById('start');
 let start_screen = document.getElementById("start-screen");
 let wrapper = document.getElementById('wrapper');
 let submitBtn = document.getElementById("submit");
+let ques_title = document.getAnimations("question-tite");
+let ques_choices = document.getElementById("choices");
 
 // reference the sound effects
 let sfxRight = new Audio('assets/sfx/correct.wav');
@@ -19,9 +21,11 @@ let sfxWrong = new Audio('assets/sfx/incorrect.wav');
 function startQuiz() {
   // hide start screen
      start_screen.style.display = "none";
+     
          
   // un-hide questions section
-     questionsEl.style.display = "block"; //not working
+     questionsEl.style.display = "block";
+      //not working
 
   // start timer
       timerId = window.setInterval(function () {
@@ -37,7 +41,11 @@ function startQuiz() {
 function getQuestion() {
   // get current question object from array
   let currentQuestion = questions[currentQuestionIndex];
-  //console.log(currentQuestion); Not needed....for testing
+  
+  ques_title = document.getElementById("questions").innerHTML = currentQuestion.title;
+  ques_choices = document.getElementById("choices").innerHTML = currentQuestion.choices;
+  
+  //document.getElementById("questions").innerHTML = currentQuestion;//Not needed....for testing
 
   // update title with current question
   questionsEl = currentQuestion;
