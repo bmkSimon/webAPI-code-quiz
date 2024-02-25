@@ -24,12 +24,11 @@ let sfxWrong = new Audio('assets/sfx/incorrect.wav');
 
 function startQuiz() {
   // hide start screen
-     start_screen.style.display = "none";
+     start_screen.style.display = 'none';
         
   // un-hide questions section
-     questionsEl.style.display = "block";
-      //not working
-
+     questionsEl.style.display = 'block';
+      
   // start timer. timer stops and ends quizz once time reaches 0.
       timerId = window.setInterval(function () {
         timeEl.innerHTML = time--; 
@@ -51,17 +50,60 @@ function getQuestion() {
   // get current question object from array
   let currentQuestion = questions[currentQuestionIndex];
   
-  ques_title = document.getElementById("questions").innerHTML = currentQuestion.title;
-  ques_choices = document.getElementById("choices").innerHTML = currentQuestion.choices;
-  
-  //document.getElementById("questions").innerHTML = currentQuestion;//Not needed....for testing
-
   // update title with current question
-  questionsEl = currentQuestion;
-  // clear out any old question choices
+  ques_title.textContent = currentQuestion.title;
+    
+  // loop over the choices for each question 
+  //create a clickable list of answers.
+  currentQuestion.choices.map((el, idx) => {
+    const option = document.createElement('button');
+    option.textContent = el;
+    option.className = 'option';
 
-  // loop over the choices for each question
-  // get the number of questions
+  //check which option is clicked and play wright/wrong sound
+  //display feedback on if answer correct or wrong
+  //end quizz if all questions asked
+    option.addEventListener('click', function () {
+      if (el === currentQuestion.answer) {
+        sfxRight.play();
+        feedbackEl.textContent = 'Correct';
+        feedbackEl.classList.remove('hide');
+
+        window.setTimeout(function () {
+          currentQuestionIndex++;
+          ques_choices.innerHTML = '';
+          feedbackEl.classList.add('hide');
+        
+          if (currentQuestionIndex === questions.length - 1) {
+            quizEnd();
+            return;
+          }
+          
+          getQuestion();
+        }, 1000);
+        return
+
+      }
+
+      sfxWrong.play();
+
+  //subtract 15s from timer if incorrect answer selected
+      time = time - 15;
+      feedbackEl.textContent = 'Wrong';
+      feedbackEl.classList.remove('hide');
+      
+      window.setTimeout(function () {
+        feedbackEl.classList.add('hide');
+      }, 1000);
+    });
+
+    ques_choices.appendChild(option);
+  }, '');
+
+  
+  
+   
+  /* get the number of questions
   let numberOfQuestions = questions.length; // assign it the value of the length of the questions array
   for (let i = 0; i < numberOfQuestions; i++) {
 
@@ -69,7 +111,7 @@ function getQuestion() {
 
     // display the choice button on the page
 
-  }
+  }*/
 }
 
 function questionClick(event) {
