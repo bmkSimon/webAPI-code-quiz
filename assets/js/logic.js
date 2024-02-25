@@ -25,18 +25,23 @@ let sfxWrong = new Audio('assets/sfx/incorrect.wav');
 function startQuiz() {
   // hide start screen
      start_screen.style.display = "none";
-     
-         
+        
   // un-hide questions section
      questionsEl.style.display = "block";
       //not working
 
-  // start timer
+  // start timer. timer stops and ends quizz once time reaches 0.
       timerId = window.setInterval(function () {
-        document.getElementById("time").innerHTML = time--; }, 1000);
+        timeEl.innerHTML = time--; 
+        if(time <= 0) {
+          time = 0;
+          timeEl.innerHTML = 0;
+          quizEnd();
+        }
+      }, 1000);
   
   // show starting time
-    document.getElementById("time").innerHTML = time;
+    timeEl.innerHTML = time;
 
   // call a function to show the next question
   getQuestion();
