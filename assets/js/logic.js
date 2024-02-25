@@ -5,14 +5,18 @@ let timerId;
 
 
 // add variables to reference DOM elements
-// example is below
-let questionsEl = document.getElementById('questions');
-let startBtn = document.getElementById('start');
-let start_screen = document.getElementById("start-screen");
-let wrapper = document.getElementById('wrapper');
-let submitBtn = document.getElementById("submit");
-let ques_title = document.getAnimations("question-tite");
-let ques_choices = document.getElementById("choices");
+const questionsEl = document.getElementById('questions');
+const startBtn = document.getElementById('start');
+const start_screen = document.getElementById('start-screen');
+const wrapper = document.getElementById('wrapper');
+const submitBtn = document.getElementById('submit');
+const ques_title = document.getAnimations('question-tite');
+const ques_choices = document.getElementById('choices');
+const timeEl = document.getElementById('time');
+const end_screen = document.getElementById('end-screen');
+const feedbackEl = document.getElementById('feedback');
+const final_score = document.getElementById('final-score');
+const initials = document.getElementById('initials');
 
 // reference the sound effects
 let sfxRight = new Audio('assets/sfx/correct.wav');
