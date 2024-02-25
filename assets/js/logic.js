@@ -138,7 +138,7 @@ function saveHighScore() {
 
   localStorage.setItem('highscores', JSON.stringify(highscores));
   window.location = 'highscores.html';
-  
+}  
 submitBtn.onclick = saveHighScore;
 
 // user clicks button to start quiz
