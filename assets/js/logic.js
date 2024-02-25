@@ -72,7 +72,7 @@ function getQuestion() {
           currentQuestionIndex++;
           ques_choices.innerHTML = '';
           feedbackEl.classList.add('hide');
-          if (currentQuestionIndex === questions.length - 1) {
+          if (currentQuestionIndex === questions.length) {
             quizEnd();
             return;
           }
