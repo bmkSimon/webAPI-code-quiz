@@ -142,7 +142,7 @@ function saveHighScore() {
 submitBtn.onclick = saveHighScore;
 
 // user clicks button to start quiz
-startBtn.onclick = startQuiz;
+startBtn.onclick = startQuiz();
 
 
 // user clicks on an element containing choices
